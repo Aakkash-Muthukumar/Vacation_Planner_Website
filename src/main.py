@@ -306,14 +306,25 @@ def activities_search(latitude, longitude, radius=20):
         json.dump(activities, json_file, indent=4)
 
 def extract_budget(budget):
-    budget_value = ""
-    for i in range(len(budget)):
-        if budget[i-1] == "$":
-            start_index = i
-    for i in range(start_index, len(budget)):
-        budget_value += budget[i]
-    budget_value = int(budget_value)
-    return budget_value
+    """Extract numeric budget value from a string like 'Budget: $1234'.
+
+    If no dollar amount is found, 0 is returned to avoid crashes."""
+    if not budget:
+        return 0
+
+    dollar_index = budget.find("$")
+    if dollar_index == -1:
+        return 0
+
+    # Gather consecutive digits following the '$' symbol
+    digits = []
+    for ch in budget[dollar_index + 1:]:
+        if ch.isdigit():
+            digits.append(ch)
+        else:
+            break
+
+    return int("".join(digits)) if digits else 0
             
     
 def main():
