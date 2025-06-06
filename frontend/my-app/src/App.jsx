@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 
@@ -10,6 +8,7 @@ function App() {
   const [travelDate, setTravelDate] = useState('');
   const [budget, setBudget] = useState('');
   const [destinationPreference, setDestinationPreference] = useState('same-state');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async () => {
     const userInput = `Starting Location: ${startingLocation}\nTravel Date: ${travelDate}\nBudget: $${budget}\nDestination Preference: ${destinationPreference}\n`;
@@ -23,24 +22,25 @@ function App() {
 
       const result = await response.text();
       console.log("Success:", result);
-      alert("Your input has been saved to input.txt!");
+      setMessage('Your input has been saved!');
     } catch (error) {
       console.error("Error:", error);
+      setMessage('Failed to save input');
     }
   };
 
   return (
-    <div className="min-h-screen bg-blue-100 flex flex-col">
-      <header>
-        <img src="logo.png" alt="Vacation Planner Logo" />
+    <div className="min-h-screen bg-blue-100 flex flex-col items-center">
+      <header className="flex justify-between items-center w-full p-4 bg-blue-600 text-white">
+        <img src="logo.png" alt="Vacation Planner Logo" className="h-10" />
         <nav className="space-x-4">
-          <button className="px-4 py-1 rounded border border-gray-300 text-sm">Home</button>
-          <button className="px-4 py-1 rounded border border-gray-300 text-sm">Sign In</button>
-          <button className="px-4 py-1 rounded border border-gray-700 bg-gray-200 text-sm">Register</button>
+          <button className="px-4 py-1 rounded bg-blue-500 text-white">Home</button>
+          <button className="px-4 py-1 rounded bg-blue-500 text-white">Sign In</button>
+          <button className="px-4 py-1 rounded bg-blue-500 text-white">Register</button>
         </nav>
       </header>
 
-      <main className="main">
+      <main className="main w-full max-w-xl p-6">
         <h1>VACATION PLANNER</h1>
         <p>"Your Dream Trip, Perfectly Planned!"</p>
 
@@ -67,7 +67,7 @@ function App() {
           </svg>
         </div>
 
-        <div className="form-container">
+        <div className="form-container bg-white rounded shadow p-6 mt-6">
           <label className="block mb-2">Starting Location:</label>
             <input
               type="text"
@@ -110,12 +110,15 @@ function App() {
       </select>
 
 
-          <div className="buttons">
-            <button id="previous-btn">&larr; Previous</button>
-             <button onClick={handleSubmit}>Submit</button>
-            <button id="next-btn">Next &rarr;</button>
-          </div>
+        <div className="buttons flex justify-between mt-4">
+          <button id="previous-btn" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">&larr; Previous</button>
+          <button onClick={handleSubmit} className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">Submit</button>
+          <button id="next-btn" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Next &rarr;</button>
         </div>
+        {message && (
+          <p className="mt-4 text-center text-green-700">{message}</p>
+        )}
+      </div>
         <div className="footer">
               <p>Figma</p>
               <p>Amadeus APIs</p>
