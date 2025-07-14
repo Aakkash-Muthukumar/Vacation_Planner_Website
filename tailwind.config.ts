@@ -52,6 +52,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				'gradient-start': 'hsl(var(--gradient-start))',
+				'gradient-end': 'hsl(var(--gradient-end))',
+				'feature-blue': 'hsl(var(--feature-blue))',
+				'feature-pink': 'hsl(var(--feature-pink))',
+				'feature-green': 'hsl(var(--feature-green))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -67,6 +72,9 @@ export default {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(ellipse at center, var(--tw-gradient-stops))',
 			},
 			keyframes: {
 				'accordion-down': {
